@@ -1,8 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('recipient', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -13,18 +11,28 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password_hash: {
+      street: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      provider: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      street_number: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      street_data: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      zipcode: {
+        type: Sequelize.STRING(8),
         allowNull: false,
       },
       created_at: {
@@ -39,6 +47,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('recipient');
   },
 };
