@@ -37,10 +37,8 @@ class RecipientController {
       return res.status(400).json({ error: 'Destinatário já existe!' });
     }
 
-    const recipient = JSON.parse(req.body);
-
     const { name, street, street_number, city, state } = await Recipient.create(
-      recipient
+      req.body
     );
     return res.json({ name, street, street_number, city, state });
   }
