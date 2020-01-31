@@ -1,6 +1,8 @@
+const { Sequelize, DataTypes } = require('sequelize');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('recipient', {
+    return queryInterface.createTable('recipients', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -47,6 +49,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('recipient');
+    return queryInterface.dropTable('recipients');
   },
 };
