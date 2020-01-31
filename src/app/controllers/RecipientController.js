@@ -43,7 +43,32 @@ class RecipientController {
     return res.json({ name, street, street_number, city, state });
   }
 
-  async update(req, res) {}
+  async update(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string(),
+      street: Yup.string(),
+      street_number: Yup.number().positive(),
+      street_data: Yup.string(),
+      city: Yup.string(),
+      state: Yup.string(),
+      zipcode: Yup.string().length(8),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(401).json({
+        error:
+          'Falha na validação dos dados fornecidos do destinatário para atualização!',
+      });
+    }
+
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+
+    const { name, street, city, state } = await recipient.update(req.body);
+
+    return res.json({ name, street, city, state });
+  }
 }
 
 export default new RecipientController();
